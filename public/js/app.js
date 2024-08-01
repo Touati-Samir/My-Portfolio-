@@ -27,38 +27,14 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Learn more button not found");
   }
 
-  const projectsSection = document.querySelector(".projects-section");
+  const carouselContainer = document.querySelector(".carousel-container");
+  const projects = document.querySelector(".project-carousel");
+  const prevButton = document.querySelector(".carousel__prev");
+  const nextButton = document.querySelector(".carousel__next");
+  const projectCards = document.querySelectorAll(".project-card");
 
-  if (projectsSection) {
-    console.log("Projects section found");
-    const projects = document.querySelector(".project-carousel");
-    const prevButton = document.querySelector(".carousel__prev");
-    const nextButton = document.querySelector(".carousel__next");
-    const projectCards = document.querySelectorAll(".project-card");
-
-    if (projects) {
-      console.log("Projects carousel found");
-    } else {
-      console.log("Projects carousel not found");
-    }
-
-    if (prevButton) {
-      console.log("Previous button found");
-    } else {
-      console.log("Previous button not found");
-    }
-
-    if (nextButton) {
-      console.log("Next button found");
-    } else {
-      console.log("Next button not found");
-    }
-
-    if (projectCards.length > 0) {
-      console.log("Project cards found");
-    } else {
-      console.log("No project cards found");
-    }
+  if (carouselContainer) {
+    console.log("Carousel container found");
 
     let currentIndex = 0;
 
@@ -69,29 +45,36 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log(`Carousel updated: currentIndex = ${currentIndex}`);
 
       prevButton.disabled = currentIndex === 0;
-      nextButton.disabled = currentIndex >= projectCards.length - 4;
+      nextButton.disabled =
+        currentIndex >=
+        projectCards.length -
+          Math.ceil(carouselContainer.offsetWidth / cardWidth);
     }
 
-    if (prevButton) {
-      prevButton.addEventListener("click", function () {
-        if (currentIndex > 0) {
-          currentIndex--;
-          updateCarousel();
-        }
-      });
-    }
+    // Define `cardWidth` inside the event listeners
+    prevButton.addEventListener("click", function () {
+      const cardWidth = projectCards[0].offsetWidth + 20; // Include margin
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel();
+      }
+    });
 
-    if (nextButton) {
-      nextButton.addEventListener("click", function () {
-        if (currentIndex < projectCards.length - 4) {
-          currentIndex++;
-          updateCarousel();
-        }
-      });
-    }
+    nextButton.addEventListener("click", function () {
+      const cardWidth = projectCards[0].offsetWidth + 20; // Include margin
+      if (
+        currentIndex <
+        projectCards.length -
+          Math.ceil(carouselContainer.offsetWidth / cardWidth)
+      ) {
+        currentIndex++;
+        updateCarousel();
+      }
+    });
 
     updateCarousel();
+    window.addEventListener("resize", updateCarousel); // Update on resize
   } else {
-    console.log("Projects section not found");
+    console.log("Carousel container not found");
   }
 });

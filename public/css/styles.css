@@ -216,6 +216,11 @@ html {
 .carousel__next {
   right: 10px;
 }
+.project-carousel {
+  display: flex;
+  transition: transform 0.5s ease;
+  overflow-x: visible; /* Assure que les éléments ne soient pas masqués */
+}
 
 @keyframes BackgroundAnimation {
   0% {
@@ -415,4 +420,96 @@ html {
   height: 24px;
   margin-right: 10px; /* Ajouter un espace entre l'icône et le texte */
   vertical-align: middle; /* Aligner verticalement avec le texte */
+}
+
+/* Styles de base */
+.container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.project {
+  width: 22%;
+  margin: 10px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  font-size: 16px;
+}
+
+/* Styles pour les écrans de moins de 768px */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .project {
+    width: 80%;
+    margin-bottom: 20px;
+  }
+
+  body {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  .menu-icon {
+    display: block;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+
+  .menu {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 999;
+  }
+
+  .menu.open {
+    display: flex;
+  }
+
+  .menu a {
+    color: white;
+    text-decoration: none;
+    margin: 20px;
+  }
+}
+
+/* Styles pour les très petits écrans */
+@media (max-width: 480px) {
+  .project {
+    width: 90%;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 14px;
+  }
 }
