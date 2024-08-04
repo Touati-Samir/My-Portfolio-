@@ -132,6 +132,7 @@ body {
 }
 
 /* Styles spécifiques pour la page des projets */
+/* Styles globaux */
 body,
 html {
   height: 100%;
@@ -139,6 +140,7 @@ html {
   font-family: Arial, sans-serif;
 }
 
+/* Style de la page des projets */
 .projects-page {
   display: flex;
   flex-direction: column;
@@ -155,21 +157,23 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 90%;
+  width: 100%;
   overflow: hidden;
   margin: 20px auto;
   position: relative;
+  padding: 0 15px; /* Ajoutez du padding pour éviter que la première carte ne soit coupée */
 }
 
 .project-carousel {
   display: flex;
   transition: transform 0.5s ease;
+  padding-left: 15px; /* Alignez le contenu du carrousel */
 }
 
 .project-card {
-  flex: 0 0 25%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex: 0 0 calc(25% - 20px); /* Ajustez la largeur pour tenir compte du margin */
   margin: 0 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   border-radius: 10px;
   overflow: hidden;
@@ -196,7 +200,6 @@ html {
 .project-card:hover {
   transform: scale(1.05);
 }
-
 .carousel__button {
   background-color: rgba(0, 0, 0, 0.5);
   border: none;
@@ -207,19 +210,48 @@ html {
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
+  font-size: 18px;
 }
 
 .carousel__prev {
-  left: 10px;
+  left: 20px;
 }
 
 .carousel__next {
-  right: 10px;
+  right: 20px;
 }
-.project-carousel {
-  display: flex;
-  transition: transform 0.5s ease;
-  overflow-x: visible; /* Assure que les éléments ne soient pas masqués */
+@media (max-width: 768px) {
+  .carousel__button {
+    padding: 5px;
+    font-size: 14px;
+  }
+}
+
+/* Ajustement pour les petits écrans */
+@media (max-width: 768px) {
+  .carousel__button {
+    padding: 8px;
+  }
+
+  .carousel__prev {
+    left: 5px;
+  }
+
+  .carousel__next {
+    right: 5px;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-card {
+    flex: 0 0 calc(50% - 20px); /* Réduisez la largeur sur les écrans plus petits */
+  }
+}
+
+@media (max-width: 480px) {
+  .project-card {
+    flex: 0 0 calc(80% - 20px); /* Réduisez davantage la largeur sur les très petits écrans */
+  }
 }
 
 @keyframes BackgroundAnimation {
@@ -233,7 +265,6 @@ html {
     background-position: 0% 50%;
   }
 }
-
 /* Styles spécifiques pour la page de contact */
 .contact-page .contact-content {
   display: flex;
